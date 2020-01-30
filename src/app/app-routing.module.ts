@@ -6,7 +6,15 @@ import { ContentLayoutComponent } from './layout/content-layout/content-layout.c
 const routes: Routes = [
   {
     path: '',
-    component: ContentLayoutComponent
+    redirectTo: '/baggage-tracking',
+    pathMatch: 'full'
+  },
+  {
+    path: '',
+    component: ContentLayoutComponent,
+    children: [
+      { path: 'baggage-tracking', loadChildren: '@modules/baggage-tracking/baggage-tracking.module#BaggageTrackingModule' }
+    ]
   }
 ];
 
