@@ -28,11 +28,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles/themes/dashforge/lib/@fortawesome/fontawesome-free/css/all.min.css",
+              "node_modules/font-awesome/css/font-awesome.min.css",
               "src/styles/themes/dashforge/lib/ionicons/css/ionicons.min.css",
               "src/styles/themes/dashforge/assets/css/dashforge.css",
               "src/styles/themes/dashforge/assets/css/dashforge.dashboard.css",
               "src/styles/themes/dashforge/assets/css/skin.cool.css",
+              "node_modules/angular-archwizard/archwizard.css",
               "src/styles.scss"
             ],
             "scripts": [
