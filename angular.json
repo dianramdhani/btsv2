@@ -28,9 +28,30 @@
               "src/assets"
             ],
             "styles": [
+              "src/styles/themes/dashforge/lib/@fortawesome/fontawesome-free/css/all.min.css",
+              "src/styles/themes/dashforge/lib/ionicons/css/ionicons.min.css",
+              "src/styles/themes/dashforge/assets/css/dashforge.css",
+              "src/styles/themes/dashforge/assets/css/dashforge.dashboard.css",
+              "src/styles/themes/dashforge/assets/css/skin.cool.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/styles/themes/dashforge/lib/jquery/jquery.min.js",
+              "src/styles/themes/dashforge/lib/bootstrap/js/bootstrap.bundle.min.js",
+              "src/styles/themes/dashforge/lib/feather-icons/feather.min.js",
+              "src/styles/themes/dashforge/lib/perfect-scrollbar/perfect-scrollbar.min.js",
+              "src/styles/themes/dashforge/lib/js-cookie/js.cookie.js",
+              {
+                "input": "src/styles/themes/dashforge/assets/js/dashforge.js",
+                "lazy": true,
+                "bundleName": "dashforge"
+              },
+              {
+                "input": "src/styles/themes/dashforge/assets/js/dashforge.aside.js",
+                "lazy": true,
+                "bundleName": "dashforge.aside"
+              }
+            ]
           },
           "configurations": {
             "production": {
@@ -93,24 +114,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles/themes/dashforge/lib/@fortawesome/fontawesome-free/css/all.min.css",
-              "src/styles/themes/dashforge/lib/ionicons/css/ionicons.min.css",
-              "src/styles/themes/dashforge/assets/css/dashforge.css",
-              "src/styles/themes/dashforge/assets/css/dashforge.dashboard.css",
               "src/styles.scss"
             ],
-            "scripts": [
-              "src/styles/themes/dashforge/lib/jquery/jquery.min.js",
-              "src/styles/themes/dashforge/lib/bootstrap/js/bootstrap.bundle.min.js",
-              "src/styles/themes/dashforge/lib/feather-icons/feather.min.js",
-              "src/styles/themes/dashforge/lib/perfect-scrollbar/perfect-scrollbar.min.js",
-              "src/styles/themes/dashforge/lib/js-cookie/js.cookie.js",
-              {
-                "input": "src/styles/themes/dashforge/assets/js/dashforge.js",
-                "lazy": true,
-                "bundleName": "dashforge"
-              }
-            ]
+            "scripts": []
           }
         },
         "lint": {

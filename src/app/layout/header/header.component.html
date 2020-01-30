@@ -1,0 +1,23 @@
+<div class="dropdown dropdown-profile">
+    <a href="" class="dropdown-link" data-toggle="dropdown" data-display="static">
+        <div class="avatar avatar-sm">
+            <img src="assets/img/user.png" class="rounded-circle" alt="">
+        </div>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right tx-13">
+        <div class="text-center">
+            <div class="avatar avatar-lg mg-b-15 mx-auto">
+                <img src="assets/img/user.png" class="rounded-circle">
+            </div>
+            <h6 class="tx-semibold mg-b-5">Baggage Tracking</h6>
+            <p class="mg-b-10 tx-12 tx-color-03">Administrator</p>
+        </div>
+        <div class="dropdown-divider"></div>
+        <a href="" class="dropdown-item" [routerLink]="['/user/account-settings']">
+            <i data-feather="settings"></i>Account Settings
+        </a>
+        <a href="" class="dropdown-item" [routerLink]="['/login']">
+            <i data-feather="log-out"></i>Logout
+        </a>
+    </div>
+</div>
