@@ -28,6 +28,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/datatables.net-dt/css/jquery.dataTables.css",
               "node_modules/font-awesome/css/font-awesome.min.css",
               "src/styles/themes/dashforge/lib/ionicons/css/ionicons.min.css",
               "src/styles/themes/dashforge/assets/css/dashforge.css",
@@ -37,7 +38,8 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "src/styles/themes/dashforge/lib/jquery/jquery.min.js",
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/datatables.net/js/jquery.dataTables.js",
               "src/styles/themes/dashforge/lib/bootstrap/js/bootstrap.bundle.min.js",
               "src/styles/themes/dashforge/lib/feather-icons/feather.min.js",
               "src/styles/themes/dashforge/lib/perfect-scrollbar/perfect-scrollbar.min.js",
