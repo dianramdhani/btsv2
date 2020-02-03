@@ -13,7 +13,8 @@ const routes: Routes = [
     path: '',
     component: ContentLayoutComponent,
     children: [
-      { path: 'baggage-tracking', loadChildren: '@modules/baggage-tracking/baggage-tracking.module#BaggageTrackingModule' }
+      { path: 'baggage-tracking', loadChildren: '@modules/baggage-tracking/baggage-tracking.module#BaggageTrackingModule' },
+      { path: 'check-in', loadChildren: '@modules/check-in/check-in.module#CheckInModule' }
     ]
   }
 ];

@@ -5,7 +5,7 @@ import { CheckInComponent } from './page/check-in/check-in.component';
 
 
 const routes: Routes = [
-  {path: '', component: CheckInComponent}
+  { path: '', component: CheckInComponent }
 ];
 
 @NgModule({
