@@ -6,16 +6,18 @@ import { AppComponent } from './app.component';
 import { CoreModule } from '@app/core.module';
 import { SharedModule } from '@shared/shared.module';
 import { DataModule } from '@data/data.module';
-import { ContentLayoutComponent } from './layout/content-layout/content-layout.component';
-import { NavComponent } from './layout/nav/nav.component';
 import { HeaderComponent } from './layout/header/header.component';
+import { LoginComponent } from './layout/login/login.component';
+import { SuperAdminLayoutComponent } from './layout/super-admin-layout/super-admin-layout.component';
+import { PassangerLayoutComponent } from './layout/passanger-layout/passanger-layout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ContentLayoutComponent,
-    NavComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoginComponent,
+    SuperAdminLayoutComponent,
+    PassangerLayoutComponent
   ],
   imports: [
     BrowserModule,
