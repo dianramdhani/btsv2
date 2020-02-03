@@ -40,8 +40,8 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
               "node_modules/datatables.net/js/jquery.dataTables.js",
+              "node_modules/feather-icons/dist/feather.min.js",
               "src/styles/themes/dashforge/lib/bootstrap/js/bootstrap.bundle.min.js",
-              "src/styles/themes/dashforge/lib/feather-icons/feather.min.js",
               "src/styles/themes/dashforge/lib/perfect-scrollbar/perfect-scrollbar.min.js",
               "src/styles/themes/dashforge/lib/js-cookie/js.cookie.js",
               {

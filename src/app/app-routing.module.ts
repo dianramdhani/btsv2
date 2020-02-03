@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ContentLayoutComponent } from './layout/content-layout/content-layout.component';
 import { LoginComponent } from './layout/login/login.component';
+import { SuperAdminLayoutComponent } from './layout/super-admin-layout/super-admin-layout.component';
 
 
 const routes: Routes = [
@@ -11,8 +11,8 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: '',
-    component: ContentLayoutComponent,
+    path: 'super-admin',
+    component: SuperAdminLayoutComponent,
     children: [
       { path: 'baggage-tracking', loadChildren: '@modules/baggage-tracking/baggage-tracking.module#BaggageTrackingModule' },
       { path: 'check-in', loadChildren: '@modules/check-in/check-in.module#CheckInModule' },
