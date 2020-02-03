@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './layout/login/login.component';
 import { SuperAdminLayoutComponent } from './layout/super-admin-layout/super-admin-layout.component';
+import { PassangerLayoutComponent } from './layout/passanger-layout/passanger-layout.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,10 @@ const routes: Routes = [
       { path: 'check-in', loadChildren: '@modules/check-in/check-in.module#CheckInModule' },
       { path: 'config-rfid-scanner', loadChildren: '@modules/config-rfid-scanner/config-rfid-scanner.module#ConfigRfidScannerModule' }
     ]
+  },
+  {
+    path: 'passanger',
+    component: PassangerLayoutComponent
   },
   {
     path: 'login',

@@ -9,13 +9,15 @@ import { DataModule } from '@data/data.module';
 import { HeaderComponent } from './layout/header/header.component';
 import { LoginComponent } from './layout/login/login.component';
 import { SuperAdminLayoutComponent } from './layout/super-admin-layout/super-admin-layout.component';
+import { PassangerLayoutComponent } from './layout/passanger-layout/passanger-layout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     LoginComponent,
-    SuperAdminLayoutComponent
+    SuperAdminLayoutComponent,
+    PassangerLayoutComponent
   ],
   imports: [
     BrowserModule,

@@ -34,6 +34,10 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/super-admin/baggage-tracking']);
         break;
 
+      case 'passanger':
+        this.router.navigate(['/passanger']);
+        break;
+
       default:
         break;
     }
