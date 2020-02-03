@@ -14,7 +14,8 @@ const routes: Routes = [
     component: ContentLayoutComponent,
     children: [
       { path: 'baggage-tracking', loadChildren: '@modules/baggage-tracking/baggage-tracking.module#BaggageTrackingModule' },
-      { path: 'check-in', loadChildren: '@modules/check-in/check-in.module#CheckInModule' }
+      { path: 'check-in', loadChildren: '@modules/check-in/check-in.module#CheckInModule' },
+      { path: 'config-rfid-scanner', loadChildren: '@modules/config-rfid-scanner/config-rfid-scanner.module#ConfigRfidScannerModule' }
     ]
   }
 ];
