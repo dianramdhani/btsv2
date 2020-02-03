@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ContentLayoutComponent } from './layout/content-layout/content-layout.component';
+import { LoginComponent } from './layout/login/login.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/baggage-tracking',
+    redirectTo: '/login',
     pathMatch: 'full'
   },
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
       { path: 'check-in', loadChildren: '@modules/check-in/check-in.module#CheckInModule' },
       { path: 'config-rfid-scanner', loadChildren: '@modules/config-rfid-scanner/config-rfid-scanner.module#ConfigRfidScannerModule' }
     ]
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   }
 ];
 

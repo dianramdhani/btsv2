@@ -9,13 +9,15 @@ import { DataModule } from '@data/data.module';
 import { ContentLayoutComponent } from './layout/content-layout/content-layout.component';
 import { NavComponent } from './layout/nav/nav.component';
 import { HeaderComponent } from './layout/header/header.component';
+import { LoginComponent } from './layout/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ContentLayoutComponent,
     NavComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
