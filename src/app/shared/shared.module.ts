@@ -4,6 +4,8 @@ import { ArchwizardModule } from 'angular-archwizard';
 import { DataTablesModule } from 'angular-datatables';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Select2Module } from 'ng2-select2';
+
 import { BaggageTrackingCpComponent } from './component/baggage-tracking-cp/baggage-tracking-cp.component';
 
 
@@ -21,6 +23,7 @@ import { BaggageTrackingCpComponent } from './component/baggage-tracking-cp/bagg
     DataTablesModule,
     NgbModule,
     ReactiveFormsModule,
+    Select2Module,
 
     BaggageTrackingCpComponent
   ]

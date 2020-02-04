@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Select2OptionData } from 'ng2-select2';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,10 @@ export class LoginComponent implements OnInit {
     { label: 'Passanger', value: 'passanger' },
   ];
   formLogin: FormGroup;
+  public exampleData: Array<Select2OptionData>;
+  options: Select2Options = {
+    width: '100%'
+  };
 
   constructor(
     private router: Router
@@ -25,6 +30,26 @@ export class LoginComponent implements OnInit {
     this.formLogin = new FormGroup({
       role: new FormControl('', Validators.required)
     });
+
+    this.exampleData = [
+      {
+        id: 'basic1',
+        text: 'Basic 1'
+      },
+      {
+        id: 'basic2',
+        disabled: true,
+        text: 'Basic 2'
+      },
+      {
+        id: 'basic3',
+        text: 'Basic 3'
+      },
+      {
+        id: 'basic4',
+        text: 'Basic 4'
+      }
+    ];
   }
 
   apply() {
