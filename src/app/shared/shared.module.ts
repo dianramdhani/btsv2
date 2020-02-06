@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ArchwizardModule } from 'angular-archwizard';
 import { DataTablesModule } from 'angular-datatables';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Select2Module } from 'ng2-select2';
 
 import { BaggageTrackingCpComponent } from './component/baggage-tracking-cp/baggage-tracking-cp.component';
@@ -24,6 +24,7 @@ import { BaggageTrackingCpComponent } from './component/baggage-tracking-cp/bagg
     NgbModule,
     ReactiveFormsModule,
     Select2Module,
+    FormsModule,
 
     BaggageTrackingCpComponent
   ]

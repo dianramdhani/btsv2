@@ -8,16 +8,16 @@ import { PassangerLayoutComponent } from './layout/passanger-layout/passanger-la
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/login',
+    redirectTo: '/super-admin/baggage-tracking',
     pathMatch: 'full'
   },
   {
     path: 'super-admin',
     component: SuperAdminLayoutComponent,
     children: [
-      { path: 'baggage-tracking', loadChildren: '@modules/baggage-tracking/baggage-tracking.module#BaggageTrackingModule' },
+      { path: 'baggage-tracking', loadChildren: '@modules/rfid-scanner-simulator/rfid-scanner-simulator.module#RfidScannerSimulatorModule' },
       { path: 'check-in', loadChildren: '@modules/check-in/check-in.module#CheckInModule' },
-      { path: 'config-rfid-scanner', loadChildren: '@modules/config-rfid-scanner/config-rfid-scanner.module#ConfigRfidScannerModule' }
+      { path: 'config-rfid-scanner', loadChildren: '@modules/config-rfid-scanner/config-rfid-scanner.module#ConfigRfidScannerModule' },
     ]
   },
   {

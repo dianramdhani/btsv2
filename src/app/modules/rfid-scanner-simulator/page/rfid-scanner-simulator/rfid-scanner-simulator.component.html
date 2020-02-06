@@ -1,0 +1,42 @@
+<div class="d-md-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
+    <h4 class="mg-b-0 tx-spacing--1">Baggage Tracking</h4>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-style1 mg-b-10">
+            <li class="breadcrumb-item">Dashboard</li>
+            <li class="breadcrumb-item active" aria-current="page">Baggage Tracking</li>
+        </ol>
+    </nav>
+</div>
+<form [formGroup]="formHistory" class="form-group form-inline">
+    <label for="">Baggage ID : </label>
+    <input type="text" class="form-control mg-r-10" formControlName="baggageId">
+    <button class="btn btn-primary" [disabled]="!formHistory.valid" (click)="checkHistory()">Check History</button>
+</form>
+<div class="card" *ngIf="baggageHistories">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Airport</th>
+                    <th>Location</th>
+                    <th>Location Time</th>
+                    <th>Process Status</th>
+                    <th>Status</th>
+                    <th>Note</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let baggageHistory of baggageHistories">
+                    <td>{{ baggageHistory.id }}</td>
+                    <td>{{ baggageHistory.airport }}</td>
+                    <td>{{ baggageHistory.location }}</td>
+                    <td>{{ baggageHistory.locationTime | date: 'medium' }}</td>
+                    <td [ngClass]="processColors[baggageHistory.processStatus]">{{ baggageHistory.processStatus }}</td>
+                    <td>{{ baggageHistory.status }}</td>
+                    <td>{{ baggageHistory.note }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
