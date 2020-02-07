@@ -3,6 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { BaggageTrackerService } from '@data/service/baggage-tracker.service';
 import { BaggageHistory } from '@data/schema/baggage-history';
+import { timer } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-rfid-scanner-simulator',
@@ -30,7 +32,12 @@ export class RfidScannerSimulatorComponent implements OnInit {
 
   async checkHistory() {
     const { baggageId } = this.formHistory.value;
-    this.baggageHistories = await this.baggageTrackerService.getBaggageHistoryByBaggageId(baggageId).toPromise();
+    timer(0, 10000)
+      .pipe(
+        tap(async () => {
+          this.baggageHistories = await this.baggageTrackerService.getBaggageHistoryByBaggageId(baggageId).toPromise();
+          console.log(this.baggageHistories);
+        })
+      ).subscribe();
   }
-
 }
