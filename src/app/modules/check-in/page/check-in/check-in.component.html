@@ -7,26 +7,51 @@
         </ol>
     </nav>
 </div>
-<div class="card">
+<form class="card" [formGroup]="formCheckIn">
     <h6 class="card-header">Form Check In</h6>
     <div class="card-body">
-        <!-- if role admin airlines remove select location -->
         <div class="form-group">
-            <label for="location">Location</label>
-            <select id="location" class="form-control">
-                <option disabled>Select location</option>
-            </select>
+            <label for="">Passanger ID</label>
+            <div class="row row-xs">
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="passengerId">
+                </div>
+                <div class="col-md-3 mg-md-t-0 mg-t-10 tx-right">
+                    <button class="btn btn-primary wd-md-100p wd-auto"
+                        [disabled]="!formCheckIn.get('passengerId').valid" (click)="checkPassanger()">
+                        Check Passanger
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="rfid">RFID Number</label>
-            <input type="text" class="form-control" placeholder="Please scan tag with RFID scanner" disabled>
-        </div>
-        <div class="form-group">
-            <label for="barcode">Barcode</label>
-            <input type="text" class="form-control" placeholder="Input barcode">
+        <div *ngIf="showNextForm">
+            <div class="form-group">
+                <label for="">Airport</label>
+                <input type="text" class="form-control" formControlName="airport">
+            </div>
+            <div class="form-group">
+                <label for="">Location</label>
+                <input type="text" class="form-control" formControlName="location">
+            </div>
+            <div class="form-group">
+                <label for="">Weight</label>
+                <input type="text" class="form-control" formControlName="weight">
+            </div>
+            <div class="form-group">
+                <label for="">Baggage ID</label>
+                <input type="text" class="form-control" formControlName="baggageId">
+            </div>
+            <div class="form-group">
+                <label for="">Baggage Tracking ID</label>
+                <input type="text" class="form-control" formControlName="baggageTrackingId">
+            </div>
+            <div class="form-group">
+                <label for="">Tracking Device ID</label>
+                <input type="text" class="form-control" formControlName="trackingDeviceId">
+            </div>
         </div>
     </div>
-    <div class="card-footer tx-right">
-        <button class="btn btn-primary">Submit</button>
+    <div class="card-footer tx-right" *ngIf="showNextForm">
+        <button class="btn btn-primary" [disabled]="!formCheckIn.valid" (click)="submit()">Submit</button>
     </div>
-</div>
+</form>

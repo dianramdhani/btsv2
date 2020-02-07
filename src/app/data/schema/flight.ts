@@ -7,4 +7,5 @@ export class Flight {
     cityFrom: string;
     cityDestination: string;
     boardingDateTime: string;
+    airportFrom?: string;
 }
