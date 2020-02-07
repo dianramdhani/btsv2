@@ -35,8 +35,10 @@ export class RfidScannerSimulatorComponent implements OnInit {
     timer(0, 10000)
       .pipe(
         tap(async () => {
-          this.baggageHistories = await this.baggageTrackerService.getBaggageHistoryByBaggageId(baggageId).toPromise();
-          console.log(this.baggageHistories);
+          this.baggageTrackerService.getBaggageHistoryByBaggageId(baggageId).subscribe(res => {
+            console.log(res);
+            this.baggageHistories = res;
+          });
         })
       ).subscribe();
   }
