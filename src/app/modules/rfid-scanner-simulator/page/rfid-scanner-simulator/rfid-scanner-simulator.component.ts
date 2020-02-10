@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { BaggageTrackerService } from '@data/service/baggage-tracker.service';
 import { BaggageHistory } from '@data/schema/baggage-history';
-import { timer } from 'rxjs';
+import { timer, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 @Component({
@@ -11,7 +11,7 @@ import { tap } from 'rxjs/operators';
   templateUrl: './rfid-scanner-simulator.component.html',
   styleUrls: ['./rfid-scanner-simulator.component.scss']
 })
-export class RfidScannerSimulatorComponent implements OnInit {
+export class RfidScannerSimulatorComponent implements OnInit, OnDestroy {
   baggageHistories: BaggageHistory[];
   processColors = {
     'ON TIME': 'bg-success',
@@ -19,6 +19,7 @@ export class RfidScannerSimulatorComponent implements OnInit {
     'MISDIRECTION': 'bg-danger'
   };
   formHistory: FormGroup;
+  timerSubscription: Subscription;
 
   constructor(
     private baggageTrackerService: BaggageTrackerService
@@ -30,9 +31,13 @@ export class RfidScannerSimulatorComponent implements OnInit {
     });
   }
 
+  ngOnDestroy() {
+    this.timerSubscription.unsubscribe();
+  }
+
   checkHistory() {
     const { baggageId } = this.formHistory.value;
-    timer(0, 5000)
+    this.timerSubscription = timer(0, 5000)
       .pipe(
         tap(() => {
           this.baggageTrackerService.getBaggageHistoryByBaggageId(baggageId)

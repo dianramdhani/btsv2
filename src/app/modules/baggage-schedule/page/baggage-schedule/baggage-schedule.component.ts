@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { timer } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { timer, Observable, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { BaggageScheduleService } from '@data/service/baggage-schedule.service';
@@ -12,10 +12,11 @@ import { BaggageSchedule } from '@data/schema/baggage-schedule';
   templateUrl: './baggage-schedule.component.html',
   styleUrls: ['./baggage-schedule.component.scss']
 })
-export class BaggageScheduleComponent implements OnInit {
+export class BaggageScheduleComponent implements OnInit, OnDestroy {
   flights: Flight[];
   flightSelected: Flight;
   baggageSchedules: BaggageSchedule[];
+  timerSubscription: Subscription;
 
   constructor(
     private baggageScheduleService: BaggageScheduleService
@@ -26,10 +27,14 @@ export class BaggageScheduleComponent implements OnInit {
     console.log(this.flights);
   }
 
+  ngOnDestroy() {
+    this.timerSubscription.unsubscribe();
+  }
+
   getBaggageSchedule(event: Event) {
     console.log(this.flightSelected);
     if (this.flightSelected) {
-      timer(0, 5000)
+      this.timerSubscription = timer(0, 5000)
         .pipe(
           tap(() => {
             this.baggageScheduleService.getBaggageScheduleByFlightId(this.flightSelected.id)
