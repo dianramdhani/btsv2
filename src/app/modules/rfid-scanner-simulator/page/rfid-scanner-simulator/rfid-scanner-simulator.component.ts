@@ -32,7 +32,7 @@ export class RfidScannerSimulatorComponent implements OnInit {
 
   async checkHistory() {
     const { baggageId } = this.formHistory.value;
-    timer(0, 10000)
+    timer(0, 5000)
       .pipe(
         tap(async () => {
           this.baggageTrackerService.getBaggageHistoryByBaggageId(baggageId).subscribe(res => {
