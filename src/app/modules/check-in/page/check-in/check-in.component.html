@@ -8,7 +8,6 @@
     </nav>
 </div>
 <form class="card" [formGroup]="formCheckIn">
-    <h6 class="card-header">Form Check In</h6>
     <div class="card-body">
         <div class="row row-xs">
             <div class="col-lg-6">
@@ -38,45 +37,68 @@
                     </div>
                 </div>
             </div>
-            <h6 class="tx-gray-500">List Baggages</h6>
-            <div formArrayName="baggages">
-                <div class="row row-xs"
-                    *ngFor="let baggage of formCheckIn['controls'].baggages['controls']; let baggageIndex = index;"
-                    [formGroupName]="baggageIndex">
-                    <div class="col-lg">
-                        <div class="form-group">
-                            <label for="">Baggage ID</label>
-                            <input type="text" class="form-control" formControlName="baggageId">
-                        </div>
-                    </div>
-                    <div class="col-lg">
-                        <div class="form-group">
-                            <label for="">Baggage Tracking ID</label>
-                            <input type="text" class="form-control" formControlName="baggageTrackingId">
-                        </div>
-                    </div>
-                    <div class="col-lg">
-                        <div class="form-group">
-                            <label for="">Weight</label>
-                            <input type="number" class="form-control" formControlName="weight">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 pd-lg-t-30 pd-t-0 tx-right">
-                        <button class="btn btn-primary" (click)="generateCode(baggageIndex, $event)">
-                            Generate Code
-                        </button>
-                        <button class="btn btn-danger" (click)="removeBaggage(baggageIndex, $event)">
-                            Remove List
-                        </button>
-                    </div>
+            <div class="mg-t-10" *ngIf="lastPassengerBaggages.length">
+                <div class="divider-text">Passenger Baggages</div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Baggage ID</th>
+                                <th>Baggage Tracking ID</th>
+                                <th>Weight</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let lastPassengerBaggage of lastPassengerBaggages">
+                                <td>{{ lastPassengerBaggage.baggageId }}</td>
+                                <td>{{ lastPassengerBaggage.baggageTrackingId }}</td>
+                                <td>{{ lastPassengerBaggage.weight }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <div class="form-grop tx-right">
-                <button class="btn btn-primary" (click)="addBaggage()">Add Baggage</button>
+            <div class="mg-t-10">
+                <div class="divider-text">Add Baggages</div>
+                <div formArrayName="baggages">
+                    <div class="row row-xs"
+                        *ngFor="let baggage of formCheckIn['controls'].baggages['controls']; let baggageIndex = index;"
+                        [formGroupName]="baggageIndex">
+                        <div class="col-lg row row-xs">
+                            <div class="col-lg">
+                                <div class="form-group">
+                                    <label for="">Baggage ID</label>
+                                    <input type="text" class="form-control" formControlName="baggageId"
+                                        (keyup.enter)="generateCode(baggageIndex, $event)">
+                                </div>
+                            </div>
+                            <div class="col-lg">
+                                <div class="form-group">
+                                    <label for="">Baggage Tracking ID</label>
+                                    <input type="text" class="form-control" formControlName="baggageTrackingId">
+                                </div>
+                            </div>
+                            <div class="col-lg">
+                                <div class="form-group">
+                                    <label for="">Weight</label>
+                                    <input type="number" class="form-control" formControlName="weight">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-auto pd-lg-t-30 pd-t-0 tx-right">
+                            <button type="button" class="btn btn-danger" (click)="removeBaggage(baggageIndex, $event)">
+                                Remove List
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-grop tx-right">
+                    <button type="button" class="btn btn-primary" (click)="addBaggage()">Add Baggage</button>
+                </div>
             </div>
         </div>
     </div>
     <div class="card-footer tx-right" *ngIf="showNextForm">
-        <button class="btn btn-primary" [disabled]="!formCheckIn.valid" (click)="submit()">Submit</button>
+        <button type="button" class="btn btn-primary" [disabled]="!formCheckIn.valid" (click)="submit()">Submit</button>
     </div>
 </form>

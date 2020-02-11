@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { CheckinService } from '@data/service/checkin.service';
+import { PassangerBaggage } from '@data/schema/passenger-baggage';
 
 @Component({
   selector: 'app-check-in',
@@ -11,6 +12,7 @@ export class CheckInComponent implements OnInit {
   formCheckIn: FormGroup;
   showNextForm = false;
   passangerIds: string[];
+  lastPassengerBaggages: PassangerBaggage[] = [];
 
   constructor(
     private checkInService: CheckinService,
@@ -37,7 +39,7 @@ export class CheckInComponent implements OnInit {
   private createBaggage() {
     return new FormGroup({
       weight: new FormControl(null, Validators.required),
-      baggageId: new FormControl({ value: '', disabled: true }, Validators.required),
+      baggageId: new FormControl('', Validators.required),
       baggageTrackingId: new FormControl({ value: '', disabled: true }, Validators.required),
       trackingDeviceId: new FormControl({ value: '', disabled: true }, Validators.required)
     });
@@ -60,6 +62,9 @@ export class CheckInComponent implements OnInit {
       airport: passenger.flight.airportFrom
     });
     this.showNextForm = true;
+
+    this.lastPassengerBaggages = await this.checkInService.getPassengerBaggageInfo(passengerId).toPromise();
+    console.log(this.lastPassengerBaggages);
   }
 
   async generateCode(index: number, event: Event) {
@@ -67,7 +72,6 @@ export class CheckInComponent implements OnInit {
       code = await this.checkInService.generateCode('CHECK IN', airport).toPromise(),
       baggages = this.formCheckIn.get('baggages') as FormArray;
     baggages.at(index).patchValue({
-      baggageId: code.baggageBarcodeId,
       baggageTrackingId: code.baggageTagId,
       trackingDeviceId: code.trackingDevice.id
     });

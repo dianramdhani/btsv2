@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Passanger } from '@data/schema/passanger';
 import { Code } from '@data/schema/code';
+import { PassangerBaggage } from '@data/schema/passenger-baggage';
 
 @Injectable({
   providedIn: 'root'
@@ -51,5 +52,9 @@ export class CheckinService {
 
   getDistinctPassengerId() {
     return this.httpClient.get<string[]>(`${this.url}/checkin/checkin/passenger/id/distinct`);
+  }
+
+  getPassengerBaggageInfo(passengerId: string) {
+    return this.httpClient.get<PassangerBaggage[]>(`${this.url}/checkin/checkin/passenger/${passengerId}/baggage`);
   }
 }
