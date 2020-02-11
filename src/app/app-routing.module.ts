@@ -18,6 +18,7 @@ const routes: Routes = [
       { path: 'baggage-tracking', loadChildren: '@modules/rfid-scanner-simulator/rfid-scanner-simulator.module#RfidScannerSimulatorModule' },
       { path: 'check-in', loadChildren: '@modules/check-in/check-in.module#CheckInModule' },
       { path: 'config-rfid-scanner', loadChildren: '@modules/config-rfid-scanner/config-rfid-scanner.module#ConfigRfidScannerModule' },
+      { path: 'baggage-schedule', loadChildren: '@modules/baggage-schedule/baggage-schedule.module#BaggageScheduleModule' },
     ]
   },
   {

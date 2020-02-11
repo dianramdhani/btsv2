@@ -17,23 +17,19 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Airport</th>
                     <th>Location</th>
                     <th>Location Time</th>
                     <th>Process Status</th>
-                    <th>Status</th>
                     <th>Note</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let baggageHistory of baggageHistories">
-                    <td>{{ baggageHistory.id }}</td>
                     <td>{{ baggageHistory.airport }}</td>
                     <td>{{ baggageHistory.location }}</td>
                     <td>{{ baggageHistory.locationTime | date: 'medium' }}</td>
                     <td [ngClass]="processColors[baggageHistory.processStatus]">{{ baggageHistory.processStatus }}</td>
-                    <td>{{ baggageHistory.status }}</td>
                     <td>{{ baggageHistory.note }}</td>
                 </tr>
             </tbody>

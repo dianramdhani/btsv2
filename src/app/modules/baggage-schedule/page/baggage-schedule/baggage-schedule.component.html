@@ -1,0 +1,95 @@
+<div class="d-md-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
+    <h4 class="mg-b-0 tx-spacing--1">Baggage Schedule</h4>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-style1 mg-b-10">
+            <li class="breadcrumb-item">Dashboard</li>
+            <li class="breadcrumb-item active" aria-current="page">Baggage Schedule</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="card">
+    <h6 class="card-header">Baggage Schedule</h6>
+    <div class="card-body">
+        <div class="row row-xs">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="" class="mr-2">Flight ID :</label>
+                    <select class="form-control" [(ngModel)]="flightSelected"
+                        (ngModelChange)="getBaggageSchedule($event)">
+                        <option *ngFor="let flight of flights" [ngValue]="flight">{{ flight.id }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="flightSelected">
+            <hr>
+            <div class="row row-xs">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="" class="mr-2">Airlines :</label>
+                        <input type="text" class="form-control" [ngModel]="flightSelected.airlines.name" disabled>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="" class="mr-2">Flight Number :</label>
+                        <input type="text" class="form-control" [ngModel]="flightSelected.flightNumber" disabled>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="" class="mr-2">From :</label>
+                        <input type="text" class="form-control"
+                            value="{{ flightSelected.airportFrom }} ({{ flightSelected.cityFrom }})" disabled>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="" class="mr-2">Destination :</label>
+                        <input type="text" class="form-control"
+                            value="{{ flightSelected.airportDestination }} ({{ flightSelected.cityDestination }})"
+                            disabled>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="" class="mr-2">Departure :</label>
+                        <input type="text" class="form-control"
+                            [ngModel]="flightSelected.departureTime | date: 'medium'" disabled>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label for="" class="mr-2">Arrival :</label>
+                        <input type="text" class="form-control" [ngModel]="flightSelected.arrivalTime | date: 'medium'"
+                            disabled>
+                    </div>
+                </div>
+
+            </div>
+            <div class="table-responsive mt-4">
+                <table class="table mb-0 table-striped">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Location</th>
+                            <th>Airport</th>
+                            <th>City</th>
+                            <th>Maximum Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let baggageSchedule of baggageSchedules">
+                            <td>{{ baggageSchedule.sequence }}</td>
+                            <td>{{ baggageSchedule.location }}</td>
+                            <td>{{ baggageSchedule.airport }}</td>
+                            <td>{{ baggageSchedule.city }}</td>
+                            <td>{{ baggageSchedule.estimationTime | date: 'medium' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
