@@ -14,7 +14,7 @@
         <div class="row row-xs">
             <div class="col-lg-4">
                 <div class="form-group">
-                    <label for="" class="mr-2">Flight ID :</label>
+                    <label for="" class="mr-2">Flight ID</label>
                     <select class="form-control" [(ngModel)]="flightSelected"
                         (ngModelChange)="getBaggageSchedule($event)">
                         <option *ngFor="let flight of flights" [ngValue]="flight">{{ flight.id }}</option>

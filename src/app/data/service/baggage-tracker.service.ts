@@ -17,4 +17,8 @@ export class BaggageTrackerService {
   getBaggageHistoryByBaggageId(baggageId: string) {
     return this.httpClient.get<BaggageHistory[]>(`${this.url}/baggage-tracker/baggage/history/id/${baggageId}`);
   }
+
+  getDistinctBaggageId() {
+    return this.httpClient.get<string[]>(`${this.url}/baggage-tracker/baggage/id/distinct`);
+  }
 }

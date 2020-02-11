@@ -7,32 +7,46 @@
         </ol>
     </nav>
 </div>
-<form [formGroup]="formHistory" class="form-group form-inline">
-    <label for="">Baggage ID : </label>
-    <input type="text" class="form-control mg-r-10" formControlName="baggageId">
-    <button class="btn btn-primary" [disabled]="!formHistory.valid" (click)="checkHistory()">Check History</button>
-</form>
-<div class="card" *ngIf="baggageHistories">
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Airport</th>
-                    <th>Location</th>
-                    <th>Location Time</th>
-                    <th>Process Status</th>
-                    <th>Note</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let baggageHistory of baggageHistories">
-                    <td>{{ baggageHistory.airport }}</td>
-                    <td>{{ baggageHistory.location }}</td>
-                    <td>{{ baggageHistory.locationTime | date: 'medium' }}</td>
-                    <td [ngClass]="processColors[baggageHistory.processStatus]">{{ baggageHistory.processStatus }}</td>
-                    <td>{{ baggageHistory.note }}</td>
-                </tr>
-            </tbody>
-        </table>
+
+<div class="card">
+    <h6 class="card-header">Baggage Histories</h6>
+    <div class="card-body">
+        <div class="row row-xs">
+            <div class="col-lg-4">
+                <form [formGroup]="formHistory" class="form-group">
+                    <label for="">Baggage ID</label>
+                    <select class="form-control" formControlName="baggageId" #_baggageId>
+                        <option value="">Select Baggage ID</option>
+                        <option *ngFor="let baggageId of baggageIds" [value]="baggageId">{{ baggageId }}</option>
+                    </select>
+                </form>
+            </div>
+        </div>
+        <div class="table-responsive mt-4" *ngIf="baggageHistories.length">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Airport</th>
+                        <th>Location</th>
+                        <th>Location Time</th>
+                        <th>Process Status</th>
+                        <th>Note</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let baggageHistory of baggageHistories">
+                        <td>{{ baggageHistory.airport }}</td>
+                        <td>{{ baggageHistory.location }}</td>
+                        <td>{{ baggageHistory.locationTime | date: 'medium' }}</td>
+                        <td [ngClass]="processColors[baggageHistory.processStatus]">{{ baggageHistory.processStatus }}
+                        </td>
+                        <td>{{ baggageHistory.note }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="tx-danger tx-center pd-y-20" *ngIf="!baggageHistories.length && _baggageId.value">
+            Baggage histories not found!
+        </p>
     </div>
 </div>

@@ -12,7 +12,7 @@ import { tap } from 'rxjs/operators';
   styleUrls: ['./rfid-scanner-simulator.component.scss']
 })
 export class RfidScannerSimulatorComponent implements OnInit, OnDestroy {
-  baggageHistories: BaggageHistory[];
+  baggageHistories: BaggageHistory[] = [];
   processColors = {
     'ON TIME': 'bg-success',
     'DELAY': 'bg-warning',
@@ -20,15 +20,19 @@ export class RfidScannerSimulatorComponent implements OnInit, OnDestroy {
   };
   formHistory: FormGroup;
   timerSubscription: Subscription;
+  baggageIds: string[];
 
   constructor(
     private baggageTrackerService: BaggageTrackerService
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.formHistory = new FormGroup({
       baggageId: new FormControl('', Validators.required)
     });
+    this.formHistory.controls['baggageId'].valueChanges.subscribe(() => this.checkHistory());
+
+    this.baggageIds = await this.baggageTrackerService.getDistinctBaggageId().toPromise();
   }
 
   ngOnDestroy() {
