@@ -28,12 +28,17 @@ export class BaggageScheduleComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.timerSubscription.unsubscribe();
+    if (this.timerSubscription) {
+      this.timerSubscription.unsubscribe();
+    }
   }
 
   getBaggageSchedule(event: Event) {
     console.log(this.flightSelected);
     if (this.flightSelected) {
+      if (this.timerSubscription) {
+        this.timerSubscription.unsubscribe();
+      }
       this.timerSubscription = timer(0, 5000)
         .pipe(
           tap(() => {

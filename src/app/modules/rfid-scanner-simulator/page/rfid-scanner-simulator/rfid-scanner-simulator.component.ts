@@ -32,11 +32,16 @@ export class RfidScannerSimulatorComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.timerSubscription.unsubscribe();
+    if (this.timerSubscription) {
+      this.timerSubscription.unsubscribe();
+    }
   }
 
   checkHistory() {
     const { baggageId } = this.formHistory.value;
+    if (this.timerSubscription) {
+      this.timerSubscription.unsubscribe();
+    }
     this.timerSubscription = timer(0, 5000)
       .pipe(
         tap(() => {
