@@ -48,4 +48,8 @@ export class CheckinService {
   generateCode(location: string, airport: string) {
     return this.httpClient.get<Code>(`${this.url}/checkin/code/new/${location}/${airport}`);
   }
+
+  getDistinctPassengerId() {
+    return this.httpClient.get<string[]>(`${this.url}/checkin/checkin/passenger/id/distinct`);
+  }
 }

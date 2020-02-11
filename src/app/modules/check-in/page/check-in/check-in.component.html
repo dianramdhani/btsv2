@@ -10,28 +10,33 @@
 <form class="card" [formGroup]="formCheckIn">
     <h6 class="card-header">Form Check In</h6>
     <div class="card-body">
-        <div class="form-group">
-            <label for="">Passanger ID</label>
-            <div class="row row-xs">
-                <div class="col">
-                    <input type="text" class="form-control" formControlName="passengerId">
-                </div>
-                <div class="col-md-3 mg-md-t-0 mg-t-10 tx-right">
-                    <button class="btn btn-primary wd-md-100p wd-auto"
-                        [disabled]="!formCheckIn.get('passengerId').valid" (click)="checkPassanger()">
-                        Check Passanger
-                    </button>
+        <div class="row row-xs">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="">Passanger ID</label>
+                    <select class="form-control" formControlName="passengerId">
+                        <option value="">Select Passanger ID</option>
+                        <option *ngFor="let passangerId of passangerIds" [value]="passangerId">
+                            {{ passangerId }}
+                        </option>
+                    </select>
                 </div>
             </div>
         </div>
         <div *ngIf="showNextForm">
-            <div class="form-group">
-                <label for="">Airport</label>
-                <input type="text" class="form-control" formControlName="airport">
-            </div>
-            <div class="form-group">
-                <label for="">Location</label>
-                <input type="text" class="form-control" formControlName="location">
+            <div class="row row-xs">
+                <div class="col-lg">
+                    <div class="form-group">
+                        <label for="">Airport</label>
+                        <input type="text" class="form-control" formControlName="airport">
+                    </div>
+                </div>
+                <div class="col-lg">
+                    <div class="form-group">
+                        <label for="">Location</label>
+                        <input type="text" class="form-control" formControlName="location">
+                    </div>
+                </div>
             </div>
             <h6 class="tx-gray-500">List Baggages</h6>
             <div formArrayName="baggages">

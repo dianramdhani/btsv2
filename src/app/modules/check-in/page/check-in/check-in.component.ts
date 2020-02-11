@@ -10,12 +10,13 @@ import { CheckinService } from '@data/service/checkin.service';
 export class CheckInComponent implements OnInit {
   formCheckIn: FormGroup;
   showNextForm = false;
+  passangerIds: string[];
 
   constructor(
     private checkInService: CheckinService,
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.formCheckIn = new FormGroup({
       passengerId: new FormControl('', Validators.required),
       airport: new FormControl({ value: '', disabled: true }, Validators.required),
@@ -23,7 +24,14 @@ export class CheckInComponent implements OnInit {
       locationTime: new FormControl(''),
       baggages: new FormArray([this.createBaggage()], Validators.required),
     });
-    this.formCheckIn.get('passengerId').valueChanges.subscribe(() => this.showNextForm = false);
+    this.formCheckIn.get('passengerId').valueChanges
+      .subscribe(() => {
+        this.showNextForm = false;
+        this.checkPassanger();
+      });
+
+    this.passangerIds = await this.checkInService.getDistinctPassengerId().toPromise();
+    console.log(this.passangerIds);
   }
 
   private createBaggage() {
