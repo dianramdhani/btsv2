@@ -16,7 +16,7 @@ export class BaggageTrackingComponent implements OnInit, OnDestroy {
   processColors = {
     'ON TIME': 'bg-success',
     'DELAY': 'bg-warning',
-    'MISDIRECTION': 'bg-danger'
+    'WRONG LOCATION': 'bg-danger'
   };
   formHistory: FormGroup;
   timerSubscription: Subscription;

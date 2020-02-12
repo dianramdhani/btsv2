@@ -10,3 +10,93 @@
         </ol>
     </nav>
 </div>
+<div class="card card-body">
+    <div>
+        <div class="divider-text">Select Flight</div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Flight Number</th>
+                        <th>Airlines</th>
+                        <th>From</th>
+                        <th>Destination</th>
+                        <th>Departure Time</th>
+                        <th>Arrival Time</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let flight of flights">
+                        <td>{{ flight.flightNumber }}</td>
+                        <td>{{ flight.airlines.name }}</td>
+                        <td>{{ flight.airportFrom }} {{ flight.cityFrom }}</td>
+                        <td>{{ flight.airportDestination }} {{ flight.cityDestination }}</td>
+                        <td>{{ flight.departureTime | date: 'medium' }}</td>
+                        <td>{{ flight.arrivalTime | date: 'medium' }}</td>
+                        <td class="tx-center wd-100">
+                            <button class="btn btn-primary" (click)="selectFlight(flight, $event)">Select</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div *ngIf="flightSelected">
+        <div class="divider-text">Select Baggage</div>
+        <div class="table-responsive" *ngIf="baggages.length">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Baggage ID</th>
+                        <th>Weight</th>
+                        <th>Passenger Name</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let baggage of baggages">
+                        <td>{{ baggage.id }}</td>
+                        <td>{{ baggage.weight }}</td>
+                        <td>{{ baggage.passenger.name }}</td>
+                        <td class="tx-center wd-100">
+                            <button class="btn btn-primary" (click)="selectBaggage(baggage, $event)">Select</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="tx-center tx-danger" *ngIf="!baggages.length">
+            No baggages data in this flight!
+        </div>
+    </div>
+    <div *ngIf="baggageSelected">
+        <div class="divider-text">Baggage History</div>
+        <div class="table-responsive" *ngIf="baggageHistories.length">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Airport</th>
+                        <th>Location</th>
+                        <th>Location Time</th>
+                        <th>Process Status</th>
+                        <th>Note</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let baggageHistory of baggageHistories">
+                        <td>{{ baggageHistory.airport }}</td>
+                        <td>{{ baggageHistory.location }}</td>
+                        <td>{{ baggageHistory.locationTime | date: 'medium' }}</td>
+                        <td [ngClass]="processColors[baggageHistory.processStatus]">{{ baggageHistory.processStatus }}
+                        </td>
+                        <td>{{ baggageHistory.note }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="tx-center tx-danger" *ngIf="!baggageHistories.length">
+            No baggages history!
+        </div>
+    </div>
+</div>

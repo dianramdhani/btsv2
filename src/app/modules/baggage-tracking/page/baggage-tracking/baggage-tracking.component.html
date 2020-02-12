@@ -36,7 +36,8 @@
                         <td>{{ baggageHistory.airport }}</td>
                         <td>{{ baggageHistory.location }}</td>
                         <td>{{ baggageHistory.locationTime | date: 'medium' }}</td>
-                        <td [ngClass]="processColors[baggageHistory.processStatus]">{{ baggageHistory.processStatus }}
+                        <td [ngClass]="processColors[baggageHistory.processStatus]">
+                            {{ baggageHistory.processStatus }}
                         </td>
                         <td>{{ baggageHistory.note }}</td>
                     </tr>
