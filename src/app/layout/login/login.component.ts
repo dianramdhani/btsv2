@@ -46,6 +46,6 @@ export class LoginComponent implements OnInit {
 
   airlinesChange() {
     this.flightManagementService.selectedAirline = this.selectedAirline;
-    this.router.navigate(['/airline']);
+    this.router.navigate(['/airline/baggage-tracking']);
   }
 }

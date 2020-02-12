@@ -24,7 +24,10 @@ const routes: Routes = [
   },
   {
     path: 'airline',
-    component: AirlinesLayoutComponent
+    component: AirlinesLayoutComponent,
+    children: [
+      { path: 'baggage-tracking', loadChildren: '@modules/baggage-tracking/baggage-tracking.module#BaggageTrackingModule' },
+    ]
   },
   {
     path: 'passanger',
