@@ -8,6 +8,7 @@ import { Airlines } from '@data/schema/airlines';
 export class FlightManagementService {
   private url: string;
   private _selectedAirline: Airlines;
+  private keySelectedAirline = 'selectedAirline';
 
   constructor(
     private httpClient: HttpClient
@@ -20,10 +21,11 @@ export class FlightManagementService {
   }
 
   get selectedAirline() {
-    return this._selectedAirline;
+    return this._selectedAirline || JSON.parse(localStorage.getItem(this.keySelectedAirline));
   }
 
   set selectedAirline(airline: Airlines) {
     this._selectedAirline = airline;
+    localStorage.setItem(this.keySelectedAirline, JSON.stringify(airline));
   }
 }
