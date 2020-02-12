@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { WizardComponent } from 'angular-archwizard';
+import { replace } from 'feather-icons';
 
 import { FlightManagementService } from '@data/service/flight-management.service';
 import { Airlines } from '@data/schema/airlines';
@@ -18,12 +20,13 @@ export class AdvanceBaggageTrackingComponent implements OnInit {
   baggages: Baggage[] = [];
   flightSelected: Flight;
   baggageSelected: Baggage;
-  baggageHistories: BaggageHistory[];
+  baggageHistories: BaggageHistory[] = [];
   processColors = {
     'ON TIME': 'bg-success',
     'DELAY': 'bg-warning',
     'WRONG LOCATION': 'bg-danger'
   };
+  @ViewChild(WizardComponent, { static: true }) wizard: WizardComponent;
 
   constructor(
     private flightManagementService: FlightManagementService,
@@ -33,16 +36,20 @@ export class AdvanceBaggageTrackingComponent implements OnInit {
   async ngOnInit() {
     this.selectedAirline = this.flightManagementService.selectedAirline;
     this.flights = (await this.flightManagementService.getFlightByParameter(this.selectedAirline.id).toPromise()).content;
+    setTimeout(() => replace(), 50);
   }
 
   async selectFlight(flight: Flight, event: Event) {
     this.flightSelected = flight;
     this.baggages = (await this.flightManagementService.getBaggageByParameter(this.flightSelected.id).toPromise()).content;
+    this.wizard.goToNextStep();
+    setTimeout(() => replace(), 50);
   }
 
   async selectBaggage(baggage: Baggage, event: Event) {
     this.baggageSelected = baggage;
     this.baggageHistories = await this.baggageTrackerService.getBaggageHistoryByBaggageId(this.baggageSelected.id).toPromise();
+    this.wizard.goToNextStep();
     console.log(this.baggageHistories);
   }
 }
