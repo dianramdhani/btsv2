@@ -1,0 +1,29 @@
+<aside class="aside aside-fixed">
+    <div class="aside-header">
+        <a href="" class="aside-logo"><img src="assets/img/logo.png" style="height: 36px"></a>
+        <a href="" class="aside-menu-link">
+            <i data-feather="menu"></i>
+            <i data-feather="x"></i>
+        </a>
+    </div>
+    <div id="navbarMenu" class="aside-body">
+        <ul class="nav nav-aside">
+            <li class="nav-label">Dashboard</li>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/airline/baggage-tracking/baggage-tracking-airline">
+                    <i data-feather="package"></i> <span>Baggage Tracking Airline</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</aside>
+
+<div class="content ht-100v pd-0">
+    <div class="content-header justify-content-end" app-header></div>
+
+    <div class="content-body">
+        <div class="container pd-x-0">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

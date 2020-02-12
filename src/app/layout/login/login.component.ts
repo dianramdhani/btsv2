@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Select2OptionData } from 'ng2-select2';
+import { FlightManagementService } from '@data/service/flight-management.service';
+import { Airlines } from '@data/schema/airlines';
+import { WizardComponent } from 'angular-archwizard';
 
 @Component({
   selector: 'app-login',
@@ -11,61 +12,40 @@ import { Select2OptionData } from 'ng2-select2';
 export class LoginComponent implements OnInit {
   roles = [
     { label: 'Super Admin', value: 'admin' },
-    { label: 'Airlines Manager', value: 'manager' },
-    { label: 'Airlines Check In Staff', value: 'checkin' },
+    { label: 'Admin Airline', value: 'airline' },
+    // { label: 'Airlines Manager', value: 'manager' },
+    // { label: 'Airlines Check In Staff', value: 'checkin' },
     { label: 'System Configurator', value: 'configurator' },
     { label: 'Passanger', value: 'passanger' },
   ];
-  formLogin: FormGroup;
-  public exampleData: Array<Select2OptionData>;
-  options: Select2Options = {
-    width: '100%'
-  };
+  airlines: Airlines[] = [];
+  selectedRole: string = '';
+  selectedAirline: Airlines = null;
+  @ViewChild(WizardComponent, { static: true }) wizard: WizardComponent;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private flightManagementService: FlightManagementService
   ) { }
 
   ngOnInit() {
-    this.formLogin = new FormGroup({
-      role: new FormControl('', Validators.required)
-    });
-
-    this.exampleData = [
-      {
-        id: 'basic1',
-        text: 'Basic 1'
-      },
-      {
-        id: 'basic2',
-        disabled: true,
-        text: 'Basic 2'
-      },
-      {
-        id: 'basic3',
-        text: 'Basic 3'
-      },
-      {
-        id: 'basic4',
-        text: 'Basic 4'
-      }
-    ];
   }
 
-  apply() {
-    const { role } = this.formLogin.value;
-    switch (role) {
+  async roleChange() {
+    switch (this.selectedRole) {
       case 'admin':
         this.router.navigate(['/super-admin/baggage-tracking']);
         break;
 
-      case 'passanger':
-        this.router.navigate(['/passanger']);
-        break;
-
-      default:
+      case 'airline':
+        this.airlines = await this.flightManagementService.getAirlines().toPromise();
+        this.wizard.goToNextStep();
         break;
     }
   }
 
+  airlinesChange() {
+    this.flightManagementService.selectedAirline = this.selectedAirline;
+    this.router.navigate(['/airline']);
+  }
 }

@@ -10,6 +10,7 @@ import { HeaderComponent } from './layout/header/header.component';
 import { LoginComponent } from './layout/login/login.component';
 import { SuperAdminLayoutComponent } from './layout/super-admin-layout/super-admin-layout.component';
 import { PassangerLayoutComponent } from './layout/passanger-layout/passanger-layout.component';
+import { AirlinesLayoutComponent } from './layout/airlines-layout/airlines-layout.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { PassangerLayoutComponent } from './layout/passanger-layout/passanger-la
     HeaderComponent,
     LoginComponent,
     SuperAdminLayoutComponent,
-    PassangerLayoutComponent
+    PassangerLayoutComponent,
+    AirlinesLayoutComponent
   ],
   imports: [
     BrowserModule,
