@@ -29,6 +29,7 @@ const routes: Routes = [
       { path: 'baggage-tracking', loadChildren: '@modules/baggage-tracking/baggage-tracking.module#BaggageTrackingModule' },
       { path: 'check-in', loadChildren: '@modules/check-in/check-in.module#CheckInModule' },
       { path: 'baggage-schedule', loadChildren: '@modules/baggage-schedule/baggage-schedule.module#BaggageScheduleModule' },
+      { path: 'baggage-monitoring', loadChildren: '@modules/baggage-monitoring/baggage-monitoring.module#BaggageMonitoringModule' },
     ]
   },
   {
