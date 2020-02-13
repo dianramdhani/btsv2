@@ -10,57 +10,79 @@
         </ol>
     </nav>
 </div>
-<div class="card mg-b-10">
+<form class="card mg-b-10" [formGroup]="formTracking">
     <h6 class="card-header">Form Tracking</h6>
     <div class="card-body">
         <div class="form-group form-row">
-            <label class="col-lg-2 col-form-label">flightNumber</label>
+            <label class="col-lg-2 col-form-label">Flight Number</label>
             <div class="col-lg">
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" formControlName="flightNumber"
+                    [ngClass]="{'bd-success': formTracking.controls.flightNumber.valid}">
             </div>
         </div>
         <div class="form-group form-row">
-            <label class="col-lg-2 col-form-label">airportFrom</label>
-            <div class="col-lg">
-                <input type="text" class="form-control">
+            <label class="col-lg-2 d-flex flex-column justify-content-center">Airport Destination</label>
+            <div class="col-lg row">
+                <div class="col-lg">
+                    <div class="form-group">
+                        <label class="tx-gray-500">From</label>
+                        <input type="text" class="form-control" formControlName="airportFrom"
+                            [ngClass]="{'bd-success': formTracking.controls.airportFrom.valid}">
+                    </div>
+                </div>
+                <div class="col-lg">
+                    <div class="form-group">
+                        <label class="tx-gray-500">To</label>
+                        <input type="text" class="form-control" formControlName="airportDestination"
+                            [ngClass]="{'bd-success': formTracking.controls.airportDestination.valid}">
+                    </div>
+                </div>
             </div>
         </div>
         <div class="form-group form-row">
-            <label class="col-lg-2 col-form-label">airportDestination</label>
-            <div class="col-lg">
-                <input type="text" class="form-control">
+            <label class="col-lg-2 d-flex flex-column justify-content-center">Departure Time</label>
+            <div class="col-lg row">
+                <div class="col-lg">
+                    <div class="form-group">
+                        <label class="tx-gray-500">Minimum</label>
+                        <input type="datetime-local" class="form-control" formControlName="minDepartureTime"
+                            [ngClass]="{'bd-success': formTracking.controls.minDepartureTime.valid}">
+                    </div>
+                </div>
+                <div class="col-lg">
+                    <div class="form-group">
+                        <label class="tx-gray-500">Maximum</label>
+                        <input type="datetime-local" class="form-control" formControlName="maxDepartureTime"
+                            [ngClass]="{'bd-success': formTracking.controls.maxDepartureTime.valid}">
+                    </div>
+                </div>
             </div>
         </div>
         <div class="form-group form-row">
-            <label class="col-lg-2 col-form-label">minDepartureTime</label>
-            <div class="col-lg">
-                <input type="text" class="form-control">
-            </div>
-        </div>
-        <div class="form-group form-row">
-            <label class="col-lg-2 col-form-label">maxDepartureTime</label>
-            <div class="col-lg">
-                <input type="text" class="form-control">
-            </div>
-        </div>
-        <div class="form-group form-row">
-            <label class="col-lg-2 col-form-label">minArrivalTime</label>
-            <div class="col-lg">
-                <input type="text" class="form-control">
-            </div>
-        </div>
-        <div class="form-group form-row">
-            <label class="col-lg-2 col-form-label">maxArrivalTime</label>
-            <div class="col-lg">
-                <input type="text" class="form-control">
+            <label class="col-lg-2 d-flex flex-column justify-content-center">Arrival Time</label>
+            <div class="col-lg row">
+                <div class="col-lg">
+                    <div class="form-group">
+                        <label class="tx-gray-500">Minimum</label>
+                        <input type="datetime-local" class="form-control" formControlName="minArrivalTime"
+                            [ngClass]="{'bd-success': formTracking.controls.minArrivalTime.valid}">
+                    </div>
+                </div>
+                <div class="col-lg">
+                    <div class="form-group">
+                        <label class="tx-gray-500">Maximum</label>
+                        <input type="datetime-local" class="form-control" formControlName="maxArrivalTime"
+                            [ngClass]="{'bd-success': formTracking.controls.maxArrivalTime.valid}">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <div class="card-footer tx-right">
-        <button class="btn btn-primary">Search</button>
+        <button class="btn btn-primary" (click)="search()">Search</button>
     </div>
-</div>
-<div class="card card-body">
+</form>
+<div class="card card-body" *ngIf="flights.length">
     <aw-wizard>
         <aw-wizard-step stepTitle="Select Flight">
             <div class="table-responsive">

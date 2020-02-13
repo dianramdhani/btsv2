@@ -8,6 +8,7 @@ import { Flight } from '@data/schema/flight';
 import { Baggage } from '@data/schema/baggage';
 import { BaggageTrackerService } from '@data/service/baggage-tracker.service';
 import { BaggageHistory } from '@data/schema/baggage-history';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-advance-baggage-tracking',
@@ -27,15 +28,30 @@ export class AdvanceBaggageTrackingComponent implements OnInit {
     'WRONG LOCATION': 'bg-danger'
   };
   @ViewChild(WizardComponent, { static: true }) wizard: WizardComponent;
+  formTracking: FormGroup;
 
   constructor(
     private flightManagementService: FlightManagementService,
     private baggageTrackerService: BaggageTrackerService
   ) { }
 
-  async ngOnInit() {
+  ngOnInit() {
+    this.formTracking = new FormGroup({
+      flightNumber: new FormControl('', Validators.required),
+      airportFrom: new FormControl('', Validators.required),
+      airportDestination: new FormControl('', Validators.required),
+      minDepartureTime: new FormControl('', Validators.required),
+      maxDepartureTime: new FormControl('', Validators.required),
+      minArrivalTime: new FormControl('', Validators.required),
+      maxArrivalTime: new FormControl('', Validators.required),
+    });
     this.selectedAirline = this.flightManagementService.selectedAirline;
-    this.flights = (await this.flightManagementService.getFlightByParameter(this.selectedAirline.id).toPromise()).content;
+  }
+
+  async search() {
+    const params = this.formTracking.value;
+    console.log(params);
+    this.flights = (await this.flightManagementService.getFlightByParameter(this.selectedAirline.id, params).toPromise()).content;
     setTimeout(() => replace(), 50);
   }
 

@@ -32,7 +32,17 @@ export class FlightManagementService {
     return this.httpClient.get<Airlines[]>(`${this.url}/flight-management/airlines`);
   }
 
-  getFlightByParameter(airlinesId: string | number) {
+  getFlightByParameter(
+    airlinesId: string | number, params?: {
+      flightNumber?: string,
+      airportFrom?: string,
+      airportDestination?: string,
+      minDepartureTime?: string,
+      maxDepartureTime?: string,
+      minArrivalTime?: string,
+      maxArrivalTime?: string,
+    }
+  ) {
     return this.httpClient.get<Table<Flight>>(`${this.url}/flight-management/flight/${airlinesId}/param`);
   }
 

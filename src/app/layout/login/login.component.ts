@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   async roleChange() {
     switch (this.selectedRole) {
       case 'admin':
-        this.router.navigate(['/super-admin/baggage-tracking']);
+        this.router.navigate(['/super-admin/baggage-tracking/simple-baggage-tracking']);
         break;
 
       case 'airline':
@@ -46,6 +46,6 @@ export class LoginComponent implements OnInit {
 
   airlinesChange() {
     this.flightManagementService.selectedAirline = this.selectedAirline;
-    this.router.navigate(['/airline/baggage-tracking']);
+    this.router.navigate(['/airline/baggage-tracking/advance-baggage-tracking']);
   }
 }
