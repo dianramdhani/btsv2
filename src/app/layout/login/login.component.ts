@@ -11,7 +11,7 @@ import { WizardComponent } from 'angular-archwizard';
 })
 export class LoginComponent implements OnInit {
   roles = [
-    { label: 'Super Admin', value: 'admin' },
+    // { label: 'Super Admin', value: 'admin' },
     { label: 'Admin Airline', value: 'airline' },
     { label: 'Passenger', value: 'passenger' },
   ];
@@ -30,9 +30,9 @@ export class LoginComponent implements OnInit {
 
   async roleChange() {
     switch (this.selectedRole) {
-      case 'admin':
-        this.router.navigate(['/super-admin/baggage-tracking/simple-baggage-tracking']);
-        break;
+      // case 'admin':
+      //   this.router.navigate(['/super-admin/baggage-tracking/simple-baggage-tracking']);
+      //   break;
 
       case 'passenger':
         this.router.navigate(['/passenger/baggage-tracking-passenger']);

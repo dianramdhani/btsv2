@@ -1,1 +1,40 @@
-<p>baggage-tracking-passenger works!</p>
+<div class="card">
+    <div class="card-body">
+        <div class="row row-xs">
+            <div class="col-lg-4">
+                <form [formGroup]="formHistory" class="form-group">
+                    <label for="">Baggage ID</label>
+                    <input type="text" class="form-control" formControlName="baggageId" #_baggageId
+                        (keyup.enter)="checkHistory()">
+                </form>
+            </div>
+        </div>
+        <div class="table-responsive mt-4" *ngIf="baggageHistories.length">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Airport</th>
+                        <th>Location</th>
+                        <th>Location Time</th>
+                        <th>Process Status</th>
+                        <th>Note</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let baggageHistory of baggageHistories">
+                        <td>{{ baggageHistory.airport }}</td>
+                        <td>{{ baggageHistory.location }}</td>
+                        <td>{{ baggageHistory.locationTime | date: 'medium' }}</td>
+                        <td [ngClass]="processColors[baggageHistory.processStatus]">
+                            {{ baggageHistory.processStatus }}
+                        </td>
+                        <td>{{ baggageHistory.note }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="tx-danger tx-center pd-y-20" *ngIf="showNotFound">
+            Baggage histories not found!
+        </p>
+    </div>
+</div>
