@@ -6,9 +6,10 @@ import { BaggageTrackingComponent } from './page/baggage-tracking/baggage-tracki
 import { SharedModule } from '@shared/shared.module';
 import { ContainerComponent } from './page/container/container.component';
 import { AdvanceBaggageTrackingComponent } from './page/advance-baggage-tracking/advance-baggage-tracking.component';
+import { BaggageTrackingPassengerComponent } from './page/baggage-tracking-passenger/baggage-tracking-passenger.component';
 
 @NgModule({
-  declarations: [BaggageTrackingComponent, ContainerComponent, AdvanceBaggageTrackingComponent],
+  declarations: [BaggageTrackingComponent, ContainerComponent, AdvanceBaggageTrackingComponent, BaggageTrackingPassengerComponent],
   imports: [
     CommonModule,
     BaggageTrackingRoutingModule,

@@ -33,8 +33,11 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'passanger',
-    component: PassangerLayoutComponent
+    path: 'passenger',
+    component: PassangerLayoutComponent,
+    children: [
+      { path: '', loadChildren: '@modules/baggage-tracking/baggage-tracking.module#BaggageTrackingModule' },
+    ]
   },
   {
     path: 'login',

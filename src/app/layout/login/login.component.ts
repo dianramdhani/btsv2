@@ -13,10 +13,7 @@ export class LoginComponent implements OnInit {
   roles = [
     { label: 'Super Admin', value: 'admin' },
     { label: 'Admin Airline', value: 'airline' },
-    // { label: 'Airlines Manager', value: 'manager' },
-    // { label: 'Airlines Check In Staff', value: 'checkin' },
-    { label: 'System Configurator', value: 'configurator' },
-    { label: 'Passanger', value: 'passanger' },
+    { label: 'Passenger', value: 'passenger' },
   ];
   airlines: Airlines[] = [];
   selectedRole: string = '';
@@ -35,6 +32,10 @@ export class LoginComponent implements OnInit {
     switch (this.selectedRole) {
       case 'admin':
         this.router.navigate(['/super-admin/baggage-tracking/simple-baggage-tracking']);
+        break;
+
+      case 'passenger':
+        this.router.navigate(['/passenger/baggage-tracking-passenger']);
         break;
 
       case 'airline':
