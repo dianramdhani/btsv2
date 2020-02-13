@@ -1,26 +1,27 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-
-import { BaggageTrackerService } from '@data/service/baggage-tracker.service';
-import { BaggageHistory } from '@data/schema/baggage-history';
 import { timer, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
+import { BaggageTrackerService } from '@data/service/baggage-tracker.service';
+import { BaggageHistory } from '@data/schema/baggage-history';
+
 @Component({
-  selector: 'app-rfid-scanner-simulator',
-  templateUrl: './rfid-scanner-simulator.component.html',
-  styleUrls: ['./rfid-scanner-simulator.component.scss']
+  selector: 'app-baggage-tracking-passenger',
+  templateUrl: './baggage-tracking-passenger.component.html',
+  styleUrls: ['./baggage-tracking-passenger.component.scss']
 })
-export class RfidScannerSimulatorComponent implements OnInit, OnDestroy {
+export class BaggageTrackingPassengerComponent implements OnInit, OnDestroy {
   baggageHistories: BaggageHistory[] = [];
   processColors = {
     'ON TIME': 'bg-success',
     'DELAY': 'bg-warning',
-    'MISDIRECTION': 'bg-danger'
+    'WRONG LOCATION': 'bg-danger'
   };
   formHistory: FormGroup;
   timerSubscription: Subscription;
   baggageIds: string[];
+  showNotFound = false;
 
   constructor(
     private baggageTrackerService: BaggageTrackerService
@@ -30,7 +31,6 @@ export class RfidScannerSimulatorComponent implements OnInit, OnDestroy {
     this.formHistory = new FormGroup({
       baggageId: new FormControl('', Validators.required)
     });
-    this.formHistory.controls['baggageId'].valueChanges.subscribe(() => this.checkHistory());
 
     this.baggageIds = await this.baggageTrackerService.getDistinctBaggageId().toPromise();
   }
@@ -53,6 +53,11 @@ export class RfidScannerSimulatorComponent implements OnInit, OnDestroy {
             .subscribe(res => {
               console.log(res);
               this.baggageHistories = res;
+              if (this.baggageHistories.length) {
+                this.showNotFound = false;
+              } else {
+                this.showNotFound = true;
+              }
             });
         })
       ).subscribe();

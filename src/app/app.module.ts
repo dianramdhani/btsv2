@@ -10,6 +10,9 @@ import { HeaderComponent } from './layout/header/header.component';
 import { LoginComponent } from './layout/login/login.component';
 import { SuperAdminLayoutComponent } from './layout/super-admin-layout/super-admin-layout.component';
 import { PassangerLayoutComponent } from './layout/passanger-layout/passanger-layout.component';
+import { AirlinesLayoutComponent } from './layout/airlines-layout/airlines-layout.component';
+import { LibraryLoaderService } from '@shared/service/library-loader.service';
+import { FlightManagementService } from '@data/service/flight-management.service';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,8 @@ import { PassangerLayoutComponent } from './layout/passanger-layout/passanger-la
     HeaderComponent,
     LoginComponent,
     SuperAdminLayoutComponent,
-    PassangerLayoutComponent
+    PassangerLayoutComponent,
+    AirlinesLayoutComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +30,10 @@ import { PassangerLayoutComponent } from './layout/passanger-layout/passanger-la
     DataModule,
     SharedModule
   ],
-  providers: [],
+  providers: [
+    LibraryLoaderService,
+    FlightManagementService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

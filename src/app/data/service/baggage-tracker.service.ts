@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BaggageHistory } from '@data/schema/baggage-history';
+import { SummaryTracking } from '@data/schema/summary-tracking';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,9 @@ export class BaggageTrackerService {
 
   getDistinctBaggageId() {
     return this.httpClient.get<string[]>(`${this.url}/baggage-tracker/baggage/id/distinct`);
+  }
+
+  getBaggageSummaryTracking(airlinesId: string | number) {
+    return this.httpClient.get<SummaryTracking[]>(`${this.url}/baggage-tracker/baggageSummaryTracking/${airlinesId}`);
   }
 }

@@ -3,27 +3,41 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './layout/login/login.component';
 import { SuperAdminLayoutComponent } from './layout/super-admin-layout/super-admin-layout.component';
 import { PassangerLayoutComponent } from './layout/passanger-layout/passanger-layout.component';
+import { AirlinesLayoutComponent } from './layout/airlines-layout/airlines-layout.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/super-admin/baggage-tracking',
+    redirectTo: '/login',
     pathMatch: 'full'
   },
   {
     path: 'super-admin',
     component: SuperAdminLayoutComponent,
     children: [
-      { path: 'baggage-tracking', loadChildren: '@modules/rfid-scanner-simulator/rfid-scanner-simulator.module#RfidScannerSimulatorModule' },
+      { path: 'baggage-tracking', loadChildren: '@modules/baggage-tracking/baggage-tracking.module#BaggageTrackingModule' },
       { path: 'check-in', loadChildren: '@modules/check-in/check-in.module#CheckInModule' },
-      { path: 'config-rfid-scanner', loadChildren: '@modules/config-rfid-scanner/config-rfid-scanner.module#ConfigRfidScannerModule' },
       { path: 'baggage-schedule', loadChildren: '@modules/baggage-schedule/baggage-schedule.module#BaggageScheduleModule' },
+      { path: 'config-rfid-scanner', loadChildren: '@modules/config-rfid-scanner/config-rfid-scanner.module#ConfigRfidScannerModule' },
     ]
   },
   {
-    path: 'passanger',
-    component: PassangerLayoutComponent
+    path: 'airline',
+    component: AirlinesLayoutComponent,
+    children: [
+      { path: 'baggage-tracking', loadChildren: '@modules/baggage-tracking/baggage-tracking.module#BaggageTrackingModule' },
+      { path: 'check-in', loadChildren: '@modules/check-in/check-in.module#CheckInModule' },
+      { path: 'baggage-schedule', loadChildren: '@modules/baggage-schedule/baggage-schedule.module#BaggageScheduleModule' },
+      { path: 'summary-baggage-monitoring', loadChildren: '@modules/summary-baggage-monitoring/summary-baggage-monitoring.module#SummaryBaggageMonitoringModule' },
+    ]
+  },
+  {
+    path: 'passenger',
+    component: PassangerLayoutComponent,
+    children: [
+      { path: '', loadChildren: '@modules/baggage-tracking/baggage-tracking.module#BaggageTrackingModule' },
+    ]
   },
   {
     path: 'login',

@@ -5,11 +5,11 @@ import { Observable, ReplaySubject } from 'rxjs';
   providedIn: 'root'
 })
 export class LibraryLoaderService {
-  private _loadedLibraries: { [url: string]: ReplaySubject<any> } = {};
+  private _loadedLibraries: { [url: string]: ReplaySubject<HTMLScriptElement | HTMLLinkElement> } = {};
 
   loadScript(url: string): Observable<any> {
     if (this._loadedLibraries[url]) {
-      return this._loadedLibraries[url].asObservable();
+      this._loadedLibraries[url].subscribe(script => script.remove());
     }
 
     this._loadedLibraries[url] = new ReplaySubject();
@@ -19,7 +19,7 @@ export class LibraryLoaderService {
     script.async = true;
     script.src = url;
     script.onload = () => {
-      this._loadedLibraries[url].next();
+      this._loadedLibraries[url].next(script);
       this._loadedLibraries[url].complete();
     };
 

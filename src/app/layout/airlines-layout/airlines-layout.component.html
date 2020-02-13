@@ -1,0 +1,50 @@
+<aside class="aside aside-fixed">
+    <div class="aside-header">
+        <a href="" class="aside-logo"><img src="assets/img/logo.png" style="height: 36px"></a>
+        <a href="" class="aside-menu-link">
+            <i data-feather="menu"></i>
+            <i data-feather="x"></i>
+        </a>
+    </div>
+    <div id="navbarMenu" class="aside-body">
+        <ul class="nav nav-aside">
+            <li class="nav-label">Dashboard</li>
+            <li class="nav-item with-sub" routerLinkActive="active show">
+                <a class="nav-link"><i data-feather="package"></i> <span>Baggage Tracking</span></a>
+                <ul>
+                    <li routerLinkActive="active">
+                        <a routerLink="/airline/baggage-tracking/simple-baggage-tracking">Simple Tracking</a>
+                    </li>
+                    <li routerLinkActive="active">
+                        <a routerLink="/airline/baggage-tracking/advance-baggage-tracking">Advance Tracking</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/airline/summary-baggage-monitoring">
+                    <i data-feather="airplay"></i> <span>Baggage Tracking Summary</span>
+                </a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/airline/check-in">
+                    <i data-feather="check"></i> <span>Check In</span>
+                </a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/airline/baggage-schedule">
+                    <i data-feather="check-square"></i> <span>Baggage Schedule</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</aside>
+
+<div class="content ht-100v pd-0">
+    <div class="content-header justify-content-end" app-header></div>
+
+    <div class="content-body">
+        <div class="container pd-x-0">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

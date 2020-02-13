@@ -1,23 +1,11 @@
-<div class="d-md-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
-    <h4 class="mg-b-0 tx-spacing--1">Baggage Tracking</h4>
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb breadcrumb-style1 mg-b-10">
-            <li class="breadcrumb-item">Dashboard</li>
-            <li class="breadcrumb-item active" aria-current="page">Baggage Tracking</li>
-        </ol>
-    </nav>
-</div>
-
 <div class="card">
     <div class="card-body">
         <div class="row row-xs">
             <div class="col-lg-4">
                 <form [formGroup]="formHistory" class="form-group">
                     <label for="">Baggage ID</label>
-                    <select class="form-control" formControlName="baggageId" #_baggageId>
-                        <option value="">Select Baggage ID</option>
-                        <option *ngFor="let baggageId of baggageIds" [value]="baggageId">{{ baggageId }}</option>
-                    </select>
+                    <input type="text" class="form-control" formControlName="baggageId" #_baggageId
+                        (keyup.enter)="checkHistory()">
                 </form>
             </div>
         </div>
@@ -37,14 +25,15 @@
                         <td>{{ baggageHistory.airport }}</td>
                         <td>{{ baggageHistory.location }}</td>
                         <td>{{ baggageHistory.locationTime | date: 'medium' }}</td>
-                        <td [ngClass]="processColors[baggageHistory.processStatus]">{{ baggageHistory.processStatus }}
+                        <td [ngClass]="processColors[baggageHistory.processStatus]">
+                            {{ baggageHistory.processStatus }}
                         </td>
                         <td>{{ baggageHistory.note }}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <p class="tx-danger tx-center pd-y-20" *ngIf="!baggageHistories.length && _baggageId.value">
+        <p class="tx-danger tx-center pd-y-20" *ngIf="showNotFound">
             Baggage histories not found!
         </p>
     </div>

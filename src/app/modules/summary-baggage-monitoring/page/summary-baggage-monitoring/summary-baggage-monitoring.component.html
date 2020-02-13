@@ -1,0 +1,64 @@
+<div class="d-md-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
+    <h4 class="mg-b-0 tx-spacing--1">Baggage Tracking Summary</h4>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-style1 mg-b-10">
+            <li class="breadcrumb-item">Dashboard</li>
+            <li class="breadcrumb-item active" aria-current="page">Baggage Tracking Summary</li>
+        </ol>
+    </nav>
+</div>
+<div class="card card-body">
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped mb-0">
+            <thead class="bg-primary tx-white">
+                <tr>
+                    <th class="tx-center align-middle" rowspan="2">Flight</th>
+                    <th class="tx-center align-middle" rowspan="2">Baggage</th>
+                    <th class="tx-center" colspan="3">Check In</th>
+                    <th class="tx-center" colspan="3">Apron</th>
+                    <th class="tx-center" colspan="3">Transfer</th>
+                    <th class="tx-center" colspan="3">Claim</th>
+                </tr>
+                <tr>
+                    <th>On Time</th>
+                    <th>Delay</th>
+                    <th>Wrong</th>
+
+                    <th>On Time</th>
+                    <th>Delay</th>
+                    <th>Wrong</th>
+
+                    <th>On Time</th>
+                    <th>Delay</th>
+                    <th>Wrong</th>
+
+                    <th>On Time</th>
+                    <th>Delay</th>
+                    <th>Wrong</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let baggage of baggageSummaryTracking">
+                    <td>{{ baggage.flight.flightNumber }}</td>
+                    <td>{{ baggage.totalBaggage }}</td>
+
+                    <td>{{ baggage.checkinBaggage['ON TIME'] }}</td>
+                    <td>{{ baggage.checkinBaggage['DELAY'] }}</td>
+                    <td>{{ baggage.checkinBaggage['WRONG LOCATION'] }}</td>
+
+                    <td>{{ baggage.apronBaggage['ON TIME'] }}</td>
+                    <td>{{ baggage.apronBaggage['DELAY'] }}</td>
+                    <td>{{ baggage.apronBaggage['WRONG LOCATION'] }}</td>
+
+                    <td>{{ baggage.transferBaggage['ON TIME'] }}</td>
+                    <td>{{ baggage.transferBaggage['DELAY'] }}</td>
+                    <td>{{ baggage.transferBaggage['WRONG LOCATION'] }}</td>
+
+                    <td>{{ baggage.claimBaggage['ON TIME'] }}</td>
+                    <td>{{ baggage.claimBaggage['DELAY'] }}</td>
+                    <td>{{ baggage.claimBaggage['WRONG LOCATION'] }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

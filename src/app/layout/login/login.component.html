@@ -2,31 +2,37 @@
     <div class="card">
         <div class="card-body">
             <img src="assets/img/logo.png">
-            <form [formGroup]="formLogin">
-                <div class="form-group">
-                    <label for="role" class="tx-gray-500">Role</label>
-                    <select id="role" class="form-control" formControlName="role">
-                        <option value="" disabled>Select Role</option>
-                        <option *ngFor="let role of roles" [value]="role.value">{{ role.label }}</option>
-                    </select>
-                </div>
-                <button class="btn btn-primary pd-y-5 pd-x-50" [disabled]="!formLogin.valid"
-                    (click)="apply()">Apply</button>
-            </form>
-            <!-- <div>
-                <div class="form-group">
-                    <label for="username" class="tx-gray-500">Username</label>
-                    <input id="username" type="text" class="form-control" placeholder="Enter your username"
-                        ng-model="username" required>
-                </div>
-                <div class="form-group">
-                    <label for="password" class="tx-gray-500">Password</label>
-                    <input id="password" type="password" class="form-control" placeholder="Enter your password"
-                        ng-model="password" required>
-                </div>
-                <button class="btn btn-primary pd-y-5 pd-x-50">Login</button>
-            </div> -->
-            <!-- <select2 [data]="exampleData" [cssImport]=true [options]="options"></select2> -->
+
+            <aw-wizard navBarLocation="">
+                <aw-wizard-step>
+                    <div class="form-group">
+                        <label class="tx-gray-500">Role</label>
+                        <select class="form-control" [(ngModel)]="selectedRole">
+                            <option value="" disabled>Select Role</option>
+                            <option *ngFor="let role of roles" [value]="role.value">{{ role.label }}</option>
+                        </select>
+                    </div>
+                    <div class="tx-center">
+                        <button type="button" class="btn btn-primary" [disabled]="!selectedRole" (click)="roleChange()">
+                            Next
+                        </button>
+                    </div>
+                </aw-wizard-step>
+                <aw-wizard-step>
+                    <div class="form-group">
+                        <label class="tx-gray-500">Airline</label>
+                        <select class="form-control" [(ngModel)]="selectedAirline">
+                            <option [ngValue]="null" disabled>Select Airline</option>
+                            <option *ngFor="let airline of airlines" [ngValue]="airline">{{ airline.name }}</option>
+                        </select>
+                    </div>
+                    <div class="tx-center">
+                        <button type="button" class="btn btn-secondary" awPreviousStep>Back</button>
+                        <button type="button" class="btn btn-primary ml-1" [disabled]="!selectedAirline" awNextStep
+                            (click)="airlinesChange()">Next</button>
+                    </div>
+                </aw-wizard-step>
+            </aw-wizard>
         </div>
     </div>
 </div>
