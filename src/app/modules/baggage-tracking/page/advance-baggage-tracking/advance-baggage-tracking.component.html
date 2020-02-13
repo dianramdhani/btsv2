@@ -82,7 +82,7 @@
         <button class="btn btn-primary" (click)="search()">Search</button>
     </div>
 </form>
-<div class="card card-body" *ngIf="flights.length">
+<div class="card card-body" [hidden]="!flights.length">
     <aw-wizard>
         <aw-wizard-step stepTitle="Select Flight">
             <div class="table-responsive">
