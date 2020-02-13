@@ -50,7 +50,6 @@ export class AdvanceBaggageTrackingComponent implements OnInit {
 
   async search() {
     const params = this.formTracking.value;
-    console.log(params);
     this.flights = (await this.flightManagementService.getFlightByParameter(this.selectedAirline.id, params).toPromise()).content;
     setTimeout(() => replace(), 50);
   }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Airlines } from '@data/schema/airlines';
 import { Table } from '@data/schema/table';
 import { Flight } from '@data/schema/flight';
@@ -43,7 +43,16 @@ export class FlightManagementService {
       maxArrivalTime?: string,
     }
   ) {
-    return this.httpClient.get<Table<Flight>>(`${this.url}/flight-management/flight/${airlinesId}/param`);
+    console.log(params);
+    const _params = new HttpParams()
+      .set('flightNumber', params.flightNumber)
+      .set('airportFrom', params.airportFrom)
+      .set('airportDestination', params.airportDestination)
+      .set('minDepartureTime', params.minDepartureTime)
+      .set('maxDepartureTime', params.maxDepartureTime)
+      .set('minArrivalTime', params.minArrivalTime)
+      .set('maxArrivalTime', params.maxArrivalTime);
+    return this.httpClient.get<Table<Flight>>(`${this.url}/flight-management/flight/${airlinesId}/param`, { params: _params });
   }
 
   getBaggageByParameter(flightId: string | number) {
