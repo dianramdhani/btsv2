@@ -9,7 +9,7 @@ import { AirlinesLayoutComponent } from './layout/airlines-layout/airlines-layou
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/super-admin/baggage-tracking',
+    redirectTo: '/login',
     pathMatch: 'full'
   },
   {

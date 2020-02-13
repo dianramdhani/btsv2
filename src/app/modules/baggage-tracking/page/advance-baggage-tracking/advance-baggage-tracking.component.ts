@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { WizardComponent } from 'angular-archwizard';
 import { replace } from 'feather-icons';
+import { Subscription, timer } from 'rxjs';
 
 import { FlightManagementService } from '@data/service/flight-management.service';
 import { Airlines } from '@data/schema/airlines';
@@ -9,13 +10,14 @@ import { Baggage } from '@data/schema/baggage';
 import { BaggageTrackerService } from '@data/service/baggage-tracker.service';
 import { BaggageHistory } from '@data/schema/baggage-history';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-advance-baggage-tracking',
   templateUrl: './advance-baggage-tracking.component.html',
   styleUrls: ['./advance-baggage-tracking.component.scss']
 })
-export class AdvanceBaggageTrackingComponent implements OnInit {
+export class AdvanceBaggageTrackingComponent implements OnInit, OnDestroy {
   selectedAirline: Airlines;
   flights: Flight[] = [];
   baggages: Baggage[] = [];
@@ -29,6 +31,7 @@ export class AdvanceBaggageTrackingComponent implements OnInit {
   };
   @ViewChild(WizardComponent, { static: true }) wizard: WizardComponent;
   formTracking: FormGroup;
+  timerSubscription: Subscription;
 
   constructor(
     private flightManagementService: FlightManagementService,
@@ -48,6 +51,12 @@ export class AdvanceBaggageTrackingComponent implements OnInit {
     this.selectedAirline = this.flightManagementService.selectedAirline;
   }
 
+  ngOnDestroy() {
+    if (this.timerSubscription) {
+      this.timerSubscription.unsubscribe();
+    }
+  }
+
   async search() {
     const params = this.formTracking.value;
     this.flights = (await this.flightManagementService.getFlightByParameter(this.selectedAirline.id, params).toPromise()).content;
@@ -63,8 +72,19 @@ export class AdvanceBaggageTrackingComponent implements OnInit {
 
   async selectBaggage(baggage: Baggage, event: Event) {
     this.baggageSelected = baggage;
-    this.baggageHistories = await this.baggageTrackerService.getBaggageHistoryByBaggageId(this.baggageSelected.id).toPromise();
     this.wizard.goToNextStep();
-    console.log(this.baggageHistories);
+
+    if (this.timerSubscription) {
+      this.timerSubscription.unsubscribe();
+    }
+    this.timerSubscription = timer(0, 5000)
+      .pipe(
+        tap(() => {
+          this.baggageTrackerService.getBaggageHistoryByBaggageId(this.baggageSelected.id).subscribe(res => {
+            this.baggageHistories = res;
+            console.log(this.baggageHistories);
+          });
+        })
+      ).subscribe();
   }
 }

@@ -19,7 +19,7 @@ export class FlightManagementService {
     this.url = 'http://apps.tritronik.com/baggage-tracker-service';
   }
 
-  get selectedAirline() {
+  get selectedAirline(): Airlines {
     return this._selectedAirline || JSON.parse(localStorage.getItem(this.keySelectedAirline));
   }
 
